@@ -1,0 +1,9 @@
+{% extends "./layout/base.html" %}
+{% block content %}
+
+<h1>pip freeze</h1>
+<ul>
+    {% for pip in pip_list %}
+        <li>{{ pip }}</li>
+    {% endfor %}
+{% endblock %}
