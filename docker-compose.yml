@@ -6,7 +6,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command:  python index.py
+    command: >
+      bash -c "black . && isort . && python index.py"
     volumes:
       - ./src:/src
     ports:
