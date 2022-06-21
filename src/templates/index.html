@@ -5,21 +5,35 @@
 <a role="button" class="btn btn-primary" href="/get_pip">Get pip freeze</a>
 <button type="button" class="btn btn-success" id="get_pip_ajax_button">Get pip freeze with ajax</button>
 
-<ul id="pip_list"></ul>
+<div id="pip_list_container">
+    <ul id="pip_list"></ul>
+</div>
 <script>
+
+    // jQueryやっともっと簡単に書ける
+    
     document.querySelector('#get_pip_ajax_button').addEventListener('click', () => {
+        let containerObj = document.getElementById('pip_list_container')
+        let ulObj = document.getElementById('pip_list');
+        while (ulObj.firstChild) {
+                ulObj.removeChild(ulObj.firstChild);
+        }
+        containerObj.classList.add("spinner-border",  "text-secondary")
+
         let req = new XMLHttpRequest();
         req.open("POST", "/get_pip_ajax", true);
         req.onreadystatechange = function () {
             if (req.readyState != 4 || req.status != 200) {
                 return;
             }
+            
+            containerObj.classList.remove("spinner-border",  "text-secondary")
             let pipList = JSON.parse(req.responseText)
             for (let i=0; i< pipList.length; i++) {
                 let liObj = document.createElement('li');
                 console.log(pipList[i])
                 liObj.textContent = pipList[i]
-                document.getElementById('pip_list').appendChild(liObj);
+                ulObj.appendChild(liObj);
             }
         }
         req.send();
