@@ -11,14 +11,14 @@
 <script>
 
     // jQueryやっともっと簡単に書ける
-    
+
     document.querySelector('#get_pip_ajax_button').addEventListener('click', () => {
         let containerObj = document.getElementById('pip_list_container')
         let ulObj = document.getElementById('pip_list');
         while (ulObj.firstChild) {
-                ulObj.removeChild(ulObj.firstChild);
+            ulObj.removeChild(ulObj.firstChild);
         }
-        containerObj.classList.add("spinner-border",  "text-secondary")
+        containerObj.classList.add("spinner-border", "text-secondary")
 
         let req = new XMLHttpRequest();
         req.open("POST", "/get_pip_ajax", true);
@@ -26,10 +26,10 @@
             if (req.readyState != 4 || req.status != 200) {
                 return;
             }
-            
-            containerObj.classList.remove("spinner-border",  "text-secondary")
+
+            containerObj.classList.remove("spinner-border", "text-secondary")
             let pipList = JSON.parse(req.responseText)
-            for (let i=0; i< pipList.length; i++) {
+            for (let i = 0; i < pipList.length; i++) {
                 let liObj = document.createElement('li');
                 console.log(pipList[i])
                 liObj.textContent = pipList[i]
