@@ -11,3 +11,5 @@
 ```sh
 docker-compose up --build
 ```
+
+open http://localhost:8000
