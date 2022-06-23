@@ -4,7 +4,7 @@ ENV PYTHONUNBUFFERED 1
 RUN mkdir /src
 
 WORKDIR /code
-ADD requirements.txt /code/
+COPY requirements.txt /code/
 RUN pip install -r requirements.txt
 
 COPY ./src /src
